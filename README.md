@@ -88,3 +88,16 @@ Feel free to open issues or submit pull requests with improvements.
 ## 📄 License
 
 This project is licensed under the MIT License.
+
+## Screenshots
+
+Veja como é simples o fluxo de autenticação com Keycloak neste app Flutter:
+
+### Tela Inicial
+![Home screen](./@1.png)
+
+### Tela de Login do Keycloak
+![Keycloak login](./@2.png)
+
+### Usuário Autenticado
+![User info](./@3.png)
