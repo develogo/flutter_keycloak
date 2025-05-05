@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.2.2
+    container_name: keycloak
+    command: start-dev --import-realm
+    environment:
+      # Configurações de host e rede
+      KC_HOSTNAME: 192.168.50.3
+      KC_HOSTNAME_PORT: 8080
+      KC_HOSTNAME_STRICT_BACKCHANNEL: "false"
+      KC_HTTP_ENABLED: "true"
+      KC_HOSTNAME_STRICT_HTTPS: "false"
+      
+      # Configurações de admin
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_HEALTH_ENABLED: "true"
+      JAVA_OPTS: "-Xms512m -Xmx1024m"      
+      KC_DB: dev-mem
+      
+    ports:
+      - "8080:8080"
+      # - "8443:8443"
+    
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+      - ./realm-export.json:/opt/keycloak/data/import/realm-export.json
+  
+    networks:
+      - keycloak_network
+
+volumes:
+  keycloak_data:
+
+networks:
+  keycloak_network:
+    driver: bridge 

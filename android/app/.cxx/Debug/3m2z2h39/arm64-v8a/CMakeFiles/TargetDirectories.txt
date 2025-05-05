@@ -1,0 +1,2 @@
+C:/Users/lippe/Documents/Projects/teste/android/app/.cxx/Debug/3m2z2h39/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/lippe/Documents/Projects/teste/android/app/.cxx/Debug/3m2z2h39/arm64-v8a/CMakeFiles/rebuild_cache.dir
