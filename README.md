@@ -94,10 +94,10 @@ This project is licensed under the MIT License.
 Veja como é simples o fluxo de autenticação com Keycloak neste app Flutter:
 
 ### Tela Inicial
-![Home screen](./@1.png)
+![Home screen](assets/1.png)
 
 ### Tela de Login do Keycloak
-![Keycloak login](./@2.png)
+![Keycloak login](assets/2.png)
 
 ### Usuário Autenticado
-![User info](./@3.png)
+![User info](assets/3.png)
