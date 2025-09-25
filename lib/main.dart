@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teste/auth_service.dart';
+import 'package:teste/screens/auth_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,86 +13,59 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Keycloak',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Keycloak'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  final AuthService authService = AuthService();
-  Map<String, dynamic>? userInfo;
-  bool isLoading = false;
-
-  Future<void> _handleLogin() async {
-    setState(() => isLoading = true);
-    final success = await authService.authenticate();
-    if (success) {
-      try {
-        final info = await authService.getUserInfo();
-        setState(() {
-          userInfo = info;
-          isLoading = false;
-        });
-      } catch (e) {
-        setState(() => isLoading = false);
-        print('Error fetching user information: $e');
-      }
-    } else {
-      setState(() => isLoading = false);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            if (isLoading)
-              const CircularProgressIndicator()
-            else if (userInfo != null)
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Text('Username: ${userInfo!['preferred_username']}'),
-                    Text('Email: ${userInfo!['email']}'),
-                    Text('ID: ${userInfo!['sub']}'),
-                    Text('Email verified: ${userInfo!['email_verified']}'),
-                  ],
-                ),
-              ),
-            ElevatedButton(
-              onPressed: _handleLogin,
-              child: const Text('Login'),
+        scaffoldBackgroundColor: Colors.black,
+        colorScheme: const ColorScheme.dark(
+          primary: Colors.white,
+          secondary: Colors.grey,
+          surface: Colors.black,
+          background: Colors.black,
+          onPrimary: Colors.black,
+          onSecondary: Colors.white,
+          onSurface: Colors.white,
+          onBackground: Colors.white,
+        ),
+        textTheme: const TextTheme(
+          displayLarge: TextStyle(
+            fontSize: 48,
+            fontWeight: FontWeight.w300,
+            letterSpacing: -1.5,
+          ),
+          titleLarge: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w400,
+          ),
+          bodyLarge: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+          ),
+          bodyMedium: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
             ),
-            ElevatedButton(
-              onPressed: () {
-                authService.logout();
-                setState(() => userInfo = null);
-              },
-              child: const Text('Logout'),
+          ),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            foregroundColor: Colors.white,
+            side: const BorderSide(color: Colors.grey),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
             ),
-          ],
+          ),
         ),
       ),
+      home: const AuthScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
