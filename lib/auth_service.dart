@@ -14,7 +14,7 @@ class AuthService {
     ),
   );
 
-  static const String _keycloakUrl = 'http://192.168.50.3:8080';
+  static const String _keycloakUrl = 'http://10.0.2.2:8080';
   static const String _realm = 'example';
   static const String _clientId = 'mobile';
   static const String _redirectUrl = 'com.example.teste://callback';
@@ -46,6 +46,9 @@ class AuthService {
           allowInsecureConnections: true,
           externalUserAgent: ExternalUserAgent.asWebAuthenticationSession,
           promptValues: ['login'],
+          additionalParameters: {
+            'kc_action': 'AUTHENTICATE',
+          },
         ),
       );
 

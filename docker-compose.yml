@@ -6,23 +6,19 @@ services:
     container_name: keycloak
     command: start-dev --import-realm
     environment:
-      # Configurações de host e rede
-      KC_HOSTNAME: 192.168.50.3
-      KC_HOSTNAME_PORT: 8080
+      KC_HOSTNAME_STRICT: "false"
       KC_HOSTNAME_STRICT_BACKCHANNEL: "false"
       KC_HTTP_ENABLED: "true"
-      KC_HOSTNAME_STRICT_HTTPS: "false"
-      
-      # Configurações de admin
+      KC_HOSTNAME_STRICT_HTTPS: "false"      
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin
       KC_HEALTH_ENABLED: "true"
       JAVA_OPTS: "-Xms512m -Xmx1024m"      
       KC_DB: dev-mem
+      KC_SPI_LOGIN_PROTOCOL_OPENID_CONNECT_LEGACY_LOGOUT_REDIRECT_URI: "true"
       
     ports:
       - "8080:8080"
-      # - "8443:8443"
     
     volumes:
       - keycloak_data:/opt/keycloak/data
